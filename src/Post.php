@@ -9,6 +9,8 @@ class Post extends Model
 {
     use Sushi;
 
+    protected $keyType = 'string';
+
     public function getRows()
     {
         return app(GhostClient::class)->posts([

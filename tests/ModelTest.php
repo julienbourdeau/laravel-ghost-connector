@@ -43,6 +43,16 @@ class ModelTest extends TestCase
         })->toArray());
     }
 
+    /** @test */
+    public function modelsHaveCorrectIds()
+    {
+        $this->instance(GhostClient::class, Mockery::mock(GhostClient::class, function ($mock) {
+            $mock->shouldReceive('posts')->andReturn($this->posts());
+        }));
+
+        $this->assertEquals('5e80568dc50444aef65bea46', Post::first()->id);
+    }
+
     protected function getPackageProviders($app)
     {
         return [LaravelGhostConnectorServiceProvider::class];
