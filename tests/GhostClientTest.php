@@ -45,14 +45,19 @@ class GhostClientTest extends TestCase
         Http::fake();
         $client = app(GhostClient::class);
 
-        collect([
-            'posts' => 'https://tests.ghost.io/ghost/api/v3/content/posts/?key=qwe+rty',
-        ])->each(function ($url, $methodName) use ($client) {
-            $client->{$methodName}();
+        $client->posts();
+        Http::assertSent(function ($request) {
+            return $request->url() == 'https://tests.ghost.io/ghost/api/v3/content/posts/?key=qwe+rty';
+        });
 
-            Http::assertSent(function ($request) use ($url) {
-                return $request->url() == $url;
-            });
+        $client->posts(['limit' => 6]);
+        Http::assertSent(function ($request) {
+            return $request->url() == 'https://tests.ghost.io/ghost/api/v3/content/posts/?limit=6&key=qwe+rty';
+        });
+
+        $client->posts(['limit' => 6, 'key' => 'yolo']);
+        Http::assertSent(function ($request) {
+            return $request->url() == 'https://tests.ghost.io/ghost/api/v3/content/posts/?limit=6&key=yolo';
         });
     }
 

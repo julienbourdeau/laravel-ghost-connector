@@ -11,6 +11,8 @@ class Post extends Model
 
     public function getRows()
     {
-        return app(GhostClient::class)->posts()['posts'];
+        return app(GhostClient::class)->posts([
+            'limit' => 'all'
+        ])['posts'];
     }
 }

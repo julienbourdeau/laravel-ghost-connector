@@ -15,20 +15,27 @@ class GhostClient
         $this->contentKey = $contentKey;
     }
 
-    public function posts()
+    public function posts(array $requestParameters = [])
     {
-        return $this->get('/posts');
+        return $this->get('/posts', $requestParameters);
     }
 
-    public function get($endpoint)
+    public function get($endpoint, array $requestParameters = [])
     {
+        return Http::get($this->url($endpoint, $requestParameters))->json();
+    }
+
+    protected function url($endpoint, array $requestParameters = [])
+    {
+        $requestParameters += ['key' => $this->contentKey];
+
         $url = sprintf(
-            '%s/ghost/api/v3/content/%s/?key=%s',
+            '%s/ghost/api/v3/content/%s/?%s',
             trim($this->apiUrl, '/'),
             trim($endpoint, '/'),
-            urlencode(trim($this->contentKey, '/'))
+            http_build_query($requestParameters)
         );
 
-        return Http::get($url)->json();
+        return $url;
     }
 }

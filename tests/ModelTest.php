@@ -18,9 +18,14 @@ class ModelTest extends TestCase
     public function postsAreRetrievedAsModelCollection()
     {
         $this->instance(GhostClient::class, Mockery::mock(GhostClient::class, function ($mock) {
-            $mock->shouldReceive('posts')->once()->andReturn(
-                $this->posts()
-            );
+            $mock->shouldReceive('posts')
+                ->once()
+                ->with([
+                    'limit' => 'all'
+                ])
+                ->andReturn(
+                    $this->posts()
+                );
         }));
 
         $this->assertEquals(7, Post::count());
