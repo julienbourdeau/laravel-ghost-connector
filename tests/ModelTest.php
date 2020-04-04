@@ -45,6 +45,6 @@ class ModelTest extends TestCase
 
     private function posts()
     {
-        return json_decode(file_get_contents('fixtures/posts.json'), true);
+        return json_decode(file_get_contents(__DIR__.'/fixtures/posts.json'), true);
     }
 }
