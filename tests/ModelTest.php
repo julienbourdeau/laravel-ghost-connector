@@ -21,7 +21,8 @@ class ModelTest extends TestCase
             $mock->shouldReceive('posts')
                 ->once()
                 ->with([
-                    'limit' => 'all'
+                    'limit' => 'all',
+                    'include' => 'authors,tags',
                 ])
                 ->andReturn(
                     $this->posts()
@@ -51,6 +52,7 @@ class ModelTest extends TestCase
         }));
 
         $this->assertEquals('5e80568dc50444aef65bea46', Post::first()->id);
+        $this->assertEquals('d28c25c8-59b6-4a9f-ae80-8c0db3f82255', Post::find('5e80568dc50444aef65bea3e')->uuid);
     }
 
     protected function getPackageProviders($app)
