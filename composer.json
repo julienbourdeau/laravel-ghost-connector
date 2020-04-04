@@ -1,6 +1,6 @@
 {
     "name": "julienbourdeau/laravel-ghost-connector",
-    "description": "",
+    "description": "Use all your content for your Ghost blog as if they were Eloquent models from your DB. Thanks to Sushi and the Ghost API!",
     "keywords": [
         "julienbourdeau",
         "laravel-ghost-connector"
@@ -17,11 +17,13 @@
     ],
     "require": {
         "php": "^7.1",
-        "illuminate/support": "^6.0"
+        "calebporzio/sushi": "^2.0",
+        "guzzlehttp/guzzle": "^6.5",
+        "illuminate/support": "^7.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^4.0",
-        "phpunit/phpunit": "^8.0"
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {
@@ -45,10 +47,7 @@
         "laravel": {
             "providers": [
                 "Julienbourdeau\\LaravelGhostConnector\\LaravelGhostConnectorServiceProvider"
-            ],
-            "aliases": {
-                "LaravelGhostConnector": "Julienbourdeau\\LaravelGhostConnector\\LaravelGhostConnectorFacade"
-            }
+            ]
         }
     }
 }

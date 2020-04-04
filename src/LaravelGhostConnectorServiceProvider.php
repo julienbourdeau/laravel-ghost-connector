@@ -6,55 +6,17 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelGhostConnectorServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
-    public function boot()
-    {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-ghost-connector');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-ghost-connector');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('laravel-ghost-connector.php'),
-            ], 'config');
-
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-ghost-connector'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/laravel-ghost-connector'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/laravel-ghost-connector'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
-        }
-    }
-
-    /**
-     * Register the application services.
-     */
     public function register()
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-ghost-connector');
+        // Default config is merged into the `services` namespace.
+        // Feel free to override the values in your `config/services.php` file.
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'services');
 
-        // Register the main class to use with the facade
-        $this->app->singleton('laravel-ghost-connector', function () {
-            return new LaravelGhostConnector;
+        $this->app->singleton(GhostClient::class, function () {
+            return new GhostClient(
+                config('services.ghost.api_url'),
+                config('services.ghost.content_key')
+            );
         });
     }
 }

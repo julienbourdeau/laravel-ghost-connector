@@ -1,7 +1,7 @@
 # Changelog
 
-All notable changes to `laravel-ghost-connector` will be documented in this file
+All **notable** changes will be documented in this file
 
-## 1.0.0 - 201X-XX-XX
+## 0.1.0 - 201X-XX-XX
 
-- initial release
+- initial draft

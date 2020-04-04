@@ -1,8 +1,8 @@
 <?php
 
-/*
- * You can place your custom package configuration in here.
- */
 return [
-
+    'ghost' => [
+        'api_url' => env('GHOST_API_URL'),
+        'content_key' => env('GHOST_CONTENT_KEY'),
+    ],
 ];
