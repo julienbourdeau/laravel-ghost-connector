@@ -1,6 +1,6 @@
 {
     "name": "julienbourdeau/laravel-ghost-connector",
-    "description": "Use all your content for your Ghost blog as if they were Eloquent models from your DB. Thanks to Sushi and the Ghost API!",
+    "description": "Use your Ghost posts as if they were Eloquent models from your DB. Thanks to Sushi and the Ghost API!",
     "keywords": [
         "julienbourdeau",
         "laravel-ghost-connector"
